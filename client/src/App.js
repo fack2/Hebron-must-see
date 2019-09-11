@@ -10,6 +10,7 @@ import Login from './components/SharedComponents/Login'
 import NavBar from './components/SharedComponents/navbar'
 import arabicListWords from './components/arabicListWords'
 import './App.css'
+import NotFound from './components/NotFound'
 
 class App extends Component {
   state = {
@@ -18,9 +19,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/places`).then(({ data }) => {
-      this.setState({ listOfPlaces: data })
-    })
+    axios
+      .get(`/api/places`)
+      .then(({ data }) => {
+        this.setState({ listOfPlaces: data })
+      })
+      .catch()
     axios.get('/api/guides').then(({ data }) => {
       this.setState({ listOfGuides: data })
     })
@@ -52,7 +56,7 @@ class App extends Component {
               render={props => (
                 <OnePlace
                   title={`Props through render`}
-                  place={this.state.listOfPlaces[props.match.params.id]}
+                  place={this.state.listOfPlaces[props.match.params.id - 1]}
                 />
               )}
             />
@@ -62,6 +66,7 @@ class App extends Component {
               path="/arabic-words"
               component={arabicListWords}
             ></Route>
+            <Route component={NotFound} />
           </Switch>
         </Router>
       </div>
