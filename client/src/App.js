@@ -10,6 +10,7 @@ import Login from './components/SharedComponents/Login'
 import Signup from './components/SharedComponents/Signup'
 import NavBar from './components/SharedComponents/navbar'
 import arabicListWords from './components/arabicListWords'
+import NewMap from './components/NewMap'
 import './App.css'
 
 class App extends Component {
@@ -34,6 +35,8 @@ class App extends Component {
           <NavBar />
 
           <Switch>
+            <Route exact path="/map" component={NewMap} />
+
             <Route exact path="/" component={Home} />
             <Route
               exact
