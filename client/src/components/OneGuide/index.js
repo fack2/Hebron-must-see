@@ -11,7 +11,7 @@ class OneGuide extends Component {
   }
 
   handleChange = event => {
-    const value = event.target.value
+    const { value } = event.target
     this.setState({ [event.target.name]: value })
   }
 
@@ -33,8 +33,8 @@ class OneGuide extends Component {
     if (guide) {
       return (
         <Fragment>
-          <div className="guideContainer">
-            <img className="guideImg" src={guide.photo} />
+          <div className="guide-container">
+            <img className="guide-img" src={guide.photo} />
             <h5>{guide.name}</h5>
             <p>{guide.description}</p>
             <h5>{guide.phone}</h5>
@@ -43,7 +43,7 @@ class OneGuide extends Component {
           </div>
           {this.state.loggedIn && (
             <input
-              className="writeReviewGuide"
+              className="write-review-guide"
               value={this.state.review}
               placeholder="Write a review here please"
               name="review"
@@ -51,14 +51,13 @@ class OneGuide extends Component {
               onClick={this.addReview}
             ></input>
           )}
-          <button className="addReviewGuide" onClick={this.loginClick}>
+          <button className="add-review-guide" onClick={this.loginClick}>
             Add Review
           </button>
         </Fragment>
       )
-    } else {
-      return <div>loading</div>
     }
+    return <div>loading</div>
   }
 }
 export default withRouter(OneGuide)

@@ -4,12 +4,12 @@
   "description": "# Description  Our website is a tourist guide for Hebron. It provides some services for Hebron new visitors. These services include showing the must-see places in hebron and their ratings. in addition to provide them with a list of most famous tourist guides for hebron tours. Moreover, the tourist can see a list of most common used words in arabic and their pronounciation to help tourists to communicate in the places they go.",
   "main": "index.js",
   "scripts": {
+    "client-install": "cd client && npm install",
+    "client": "cd client && npm run start",
     "start": "node ./server/index.js",
-    "build:client": "cd client && npm run build",
-    "dev": "nodemon ./server/index.js",
-    "dev:all": "npm run build:client && npm run dev",
-    "lint": "./node_modules/.bin/eslint ./server",
-    "lint:fix": "./node_modules/.bin/eslint ./server --fix",
+    "server": "nodemon ./server/index.js",
+    "build": "cd client && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/fack2/Hebron-must-see#readme",
   "devDependencies": {
+    "concurrently": "^4.1.2",
     "eslint": "^6.3.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",

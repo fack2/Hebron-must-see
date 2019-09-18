@@ -1,4 +1,4 @@
-.arabicListTitle {
+.arabic-list-title {
   font-size: large;
 }
 
@@ -35,7 +35,7 @@
   color: white;
 }
 
-.getPronunciation {
+.get-pronunciation {
   width: 20px;
   height: 20px;
   position: relative;
@@ -45,7 +45,7 @@
   border-radius: 8px;
 }
 
-.audioBar {
+.audio-bar {
   width: 180px;
   height: 20px;
   position: relative;

@@ -17,6 +17,7 @@ class Signup extends Component {
     phone: '',
     userType: 'user'
   }
+
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -32,13 +33,16 @@ class Signup extends Component {
   }
 
   validatePassword = () => {
-    return (
+    const isPasswordValid =
       this.state.password.length > 6 &&
       this.state.password === this.state.confirmPassword
-    )
+    return isPasswordValid
   }
 
   pressButton = event => {
+    event.preventDefault()
+    const { history } = this.props
+
     const {
       email,
       name,
@@ -51,6 +55,7 @@ class Signup extends Component {
       description,
       userType
     } = this.state
+
     axios
       .post('/api/signup', {
         name,
@@ -64,13 +69,16 @@ class Signup extends Component {
         age,
         userType
       })
-      .then(result => console.log(result.data, 'ax'))
+      .then(history.push('/login'))
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   render() {
     return (
       <>
-        <h1 className="signupTitle">Signup</h1>
+        <h1 className="signup-title">Signup</h1>
 
         <form className="extra">
           <input
@@ -102,7 +110,7 @@ class Signup extends Component {
 
           <input
             type="password"
-            name="confirmPassword"
+            name="confirm-password"
             onChange={this.onChange}
             placeholder="Confirm your password..."
             value={this.state.confirmPassword}
@@ -118,8 +126,7 @@ class Signup extends Component {
             </div>
           ) : (
             <div>
-              <p className="TrueValidate">
-                {' '}
+              <p className="true-validate">
                 your password equal confirm password
               </p>
             </div>
@@ -129,13 +136,17 @@ class Signup extends Component {
             <fieldset className="hint">
               <p>If you signup as a guide</p>
               <p> please press guide button and fill the other section</p>
-              <button className="typeButton"onClick={this.ShowDisplayBio}>Guide</button>
-              <button className="typeButton" onClick={this.displayShorterBio}>Tourist</button>
+              <button className="type-button" onClick={this.ShowDisplayBio}>
+                Guide
+              </button>
+              <button className="type-button" onClick={this.displayShorterBio}>
+                Tourist
+              </button>
             </fieldset>
           </div>
 
           {this.state.displayBio ? (
-            <div >
+            <div>
               <input
                 type="text"
                 name="type"
@@ -193,8 +204,14 @@ class Signup extends Component {
             <div></div>
           )}
           <br />
-          <button className="signup" type="submit" onClick={this.pressButton}>
-            Signup
+          <button
+            className="signup"
+            type="submit"
+            value="signup"
+            name="button"
+            onClick={this.pressButton}
+          >
+            SigUp
           </button>
         </form>
       </>

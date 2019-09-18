@@ -8,7 +8,8 @@ const addGuide = (
   age,
   name,
   email,
-  hash
+  hash,
+  next
 ) => {
   return dbConnection
     .query(
@@ -20,5 +21,8 @@ const addGuide = (
       [type, photo, description, availability, phone, age, name, email, hash]
     )
     .then(res => res.rows)
+    .catch(err => {
+      next(err)
+    })
 }
 module.exports = addGuide

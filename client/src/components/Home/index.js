@@ -5,6 +5,7 @@ class Home extends Component {
   placesClick = () => {
     this.props.history.push('/places')
   }
+
   render() {
     return (
       <div>
@@ -23,9 +24,9 @@ class Home extends Component {
           width="370"
           height="300"
           src="https://www.youtube.com/embed/h1bVr3rk1zA"
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
         <div>
           <button className="discover" onClick={this.placesClick}>
