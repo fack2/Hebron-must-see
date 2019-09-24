@@ -1,11 +1,11 @@
-.guideContainer {
+.guide-container {
   margin: 20px 20px 20px 20px;
   border: 2px solid darkblue;
   border-radius: 15px;
   text-align: center;
 }
 
-.guideImg {
+.guide-img {
   margin-top: 20px;
   width: 100px;
   height: 130px;
@@ -17,14 +17,14 @@
   margin-left: 13px;
 }
 
-.addReviewGuide {
+.add-review-guide {
   background-color: rgb(20, 59, 80);
   color: white;
   font-size: 18px;
   padding: 10px 30px;
 }
 
-.writeReviewGuide {
+.write-review-guide {
   border-radius: 5px;
   height: 30px;
   padding: 2%;

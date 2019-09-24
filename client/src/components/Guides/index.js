@@ -10,19 +10,24 @@ class Guides extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ initialList: this.props.listOfItems, filteredItems: this.props.listOfItems })
+    this.setState({
+      initialList: this.props.listOfItems,
+      filteredItems: this.props.listOfItems
+    })
   }
 
-  updateClickedFilter = (clickedFilter) => {
+  updateClickedFilter = clickedFilter => {
     this.setState({ clickedFilter })
     this.updateFilteredItems(clickedFilter)
   }
 
-  updateFilteredItems = (clickedFilter) => {
+  updateFilteredItems = clickedFilter => {
     if (clickedFilter === 'All') {
       this.setState({ filteredItems: this.state.initialList })
     } else {
-      const filteredItems = this.state.initialList.filter((item) => item.type === clickedFilter)
+      const filteredItems = this.state.initialList.filter(
+        item => item.type === clickedFilter
+      )
       this.setState({ filteredItems })
     }
   }
@@ -30,7 +35,10 @@ class Guides extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Filter filterList={[ 'All', 'English', 'Italian', 'French' ]} updateClickedFilter={this.updateClickedFilter} />
+        <Filter
+          filterList={['All', 'English', 'Italian', 'French']}
+          updateClickedFilter={this.updateClickedFilter}
+        />
         <ListOfItems type="guides" listOfItems={this.state.filteredItems} />
       </React.Fragment>
     )

@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  width:100%;
+  width: 100%;
   text-align: center;
 }
 
@@ -10,10 +10,10 @@ body {
   background-color: #00134d;
 }
 
-.logo{
+.logo {
   width: 74px;
   height: 74px;
-  margin:  1% -5% 1% 16%;
+  margin: 1% -5% 1% 16%;
 }
 
 .menu {
@@ -22,7 +22,7 @@ body {
   margin: 39% 5% 2% 21%;
 }
 
-.appTitle {
+.app-title {
   margin: 9% 3% 0% 0%;
   font-size: 100%;
   color: white;

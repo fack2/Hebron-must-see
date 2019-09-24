@@ -15,30 +15,36 @@ class Signup extends Component {
     age: '',
     description: '',
     phone: '',
-    userType: 'user'
+    userType: 'user',
+    user: 'tourist'
   }
+
   onChange = event => {
+    const { name, value } = event.target
+    console.log('llllll', name, value)
+
     this.setState({
-      [event.target.name]: event.target.value
+      [name]: value
     })
-  }
 
-  ShowDisplayBio = () => {
-    this.setState({ displayBio: true, userType: 'guide' })
-  }
-
-  displayShorterBio = () => {
-    this.setState({ displayBio: false })
+    if (name === 'user' && value === 'tourist') {
+      this.setState({ displayBio: false })
+    } else if (name === 'user' && value === 'guideguide') {
+      this.setState({ displayBio: true, userType: '' })
+    }
   }
 
   validatePassword = () => {
-    return (
+    const pss =
       this.state.password.length > 6 &&
-      this.state.password === this.state.confirmPassword
-    )
+      this.state.password == this.state.confirmPassword
+    return pss
   }
 
   pressButton = event => {
+    event.preventDefault()
+    const { history } = this.props
+
     const {
       email,
       name,
@@ -49,8 +55,10 @@ class Signup extends Component {
       age,
       phone,
       description,
-      userType
+      userType,
+      confirmPassword
     } = this.state
+
     axios
       .post('/api/signup', {
         name,
@@ -64,13 +72,16 @@ class Signup extends Component {
         age,
         userType
       })
-      .then(result => console.log(result.data, 'ax'))
+      .then(history.push('/login'))
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   render() {
     return (
       <>
-        <h1 className="signupTitle">Signup</h1>
+        <h1 className="signup-title">Signup</h1>
 
         <form className="extra">
           <input
@@ -108,18 +119,17 @@ class Signup extends Component {
             value={this.state.confirmPassword}
             required
           />
+
           {!this.validatePassword() ? (
             <div>
               <p className="validate">
-                {' '}
                 your password must be than 7 character an be same of your
                 confirm password
               </p>
             </div>
           ) : (
             <div>
-              <p className="TrueValidate">
-                {' '}
+              <p className="true-validate">
                 your password equal confirm password
               </p>
             </div>
@@ -129,13 +139,34 @@ class Signup extends Component {
             <fieldset className="hint">
               <p>If you signup as a guide</p>
               <p> please press guide button and fill the other section</p>
-              <button className="typeButton"onClick={this.ShowDisplayBio}>Guide</button>
-              <button className="typeButton" onClick={this.displayShorterBio}>Tourist</button>
+
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    value="guide"
+                    name="user"
+                    checked={this.state.user === 'guide'}
+                    onChange={this.onChange}
+                  />
+                  guide
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="tourist"
+                    name="user"
+                    checked={this.state.user === 'tourist'}
+                    onChange={this.onChange}
+                  />
+                  Tourist
+                </label>
+              </div>
             </fieldset>
           </div>
 
           {this.state.displayBio ? (
-            <div >
+            <div>
               <input
                 type="text"
                 name="type"
@@ -193,8 +224,14 @@ class Signup extends Component {
             <div></div>
           )}
           <br />
-          <button className="signup" type="submit" onClick={this.pressButton}>
-            Signup
+          <button
+            className="signup"
+            type="submit"
+            value="signup"
+            name="button"
+            onClick={this.pressButton}
+          >
+            SigUp
           </button>
         </form>
       </>
